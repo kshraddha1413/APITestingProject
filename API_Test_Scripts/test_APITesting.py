@@ -47,7 +47,7 @@ def test_getRequestData():
 @pytest.mark.smoke
 @pytest.mark.all
 def test_postRequest():
-    payload_data = open(r'payload.json', "r").read()
+    payload_data = open(r'API_Test_Scripts/payload.json', "r").read()
     json_data = json.loads(payload_data)
     print(json_data['name'])
     print(type(json_data))
