@@ -1,6 +1,10 @@
 import pytest
 import requests
 import json
+data=payload_data ={
+         "name": "morpheus",
+         "job": "manager"
+}
 
 putPaylaod = {
 
@@ -48,16 +52,13 @@ def test_getRequestData():
 @pytest.mark.smoke
 @pytest.mark.all
 def test_postRequest():
-    payload_data = open(r'API_Test_Scripts/payload.json', "r").read()
-    json_data = json.loads(payload_data)
-    print(json_data['name'])
-    print(type(json_data))
+    
     print(payload_data)
-    post_response = requests.post("https://reqres.in/api/users", data=json.loads(payload_data))
+    post_response = requests.post("https://reqres.in/api/users", data=payload_data)
     assert post_response.status_code == 201, "response code not expected"
     print(post_response)
-    assert post_response.json()['name'] == json_data['name']
-    assert post_response.json()['job'] == json_data['job']
+    assert post_response.json()['name'] == payload_data['name']
+    assert post_response.json()['job'] == payload_data['job']
     assert post_response.json()['id'] != None, "id not assinged"
     assert post_response.json()['createdAt'] != None, "date not assinged"
     print(post_response.json())
